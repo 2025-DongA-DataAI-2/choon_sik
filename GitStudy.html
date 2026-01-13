@@ -15,10 +15,10 @@
     </table>
 
     <img id="cs" src="https://i.namu.wiki/i/lLN2uipkXBiPPVXIwW-oQmBLa0gLlaBo4-GFZ29mUyp9_jgBCniWIwffChkoZ2_rb8h9KeJO3G1yy6Rb4xC7k2QfsPC_MoNnqMQMhFuAbPE-nibxbmS28KZ08jWTqjXuqZTA6_cyi-9hy_bnR8fO9w.webp" alt="춘식이" width="300">
-    
     <h1 id=star >push test★</h1>
 
     <h3>hi</h3>
+    <div id="csk"></div>
 
     <script>
         let star = document.getElementById('star')
@@ -26,9 +26,12 @@
         star.addEventListener('click',()=>{
             console.log('이벤트 테스트')
         })
-
+        let csk = document.getElementById("csk")
         let cs = document.getElementById('cs')
-        cs.addEventListener('click',()=>{console.log('춘식이')})
+        cs.addEventListener('click',()=>{
+            console.log('춘식이')
+            csk.innerHTML += "<br>춘식이 귀여워</br>"
+        })
     </script>
 </body>
 </html>
