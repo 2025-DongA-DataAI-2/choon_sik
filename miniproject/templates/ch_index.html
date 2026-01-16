@@ -1,60 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        table{
+
+        @font-face {
+            font-family: 'PyeongchangPeace';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Light.woff2') format('woff2');
+            font-weight: 300;
+            font-display: swap;
+        }
+
+        body {
+            background-color: rgb(21, 21, 59);
+        }
+
+
+
+        table {
             width: 1200px;
             height: 500px;
             margin: 0px auto;
             text-align: center;
+            background-color: white;
+            border-collapse: collapse;
+
+            border: 1px solid rgb(1, 11, 44);
         }
 
-        h1{
+        h1 {
+            font-family:'PyeongchangPeace';
             text-align: center;
+            color: rgb(227, 234, 255);
 
-
-            
         }
 
-        #bk1{
-            
+        td {
+            background-color: rgb(236, 246, 255);
         }
 
-        iframe{
+        .left {
+            width: 200px;
+        }
+
+
+
+        iframe {
             width: 100%;
-            height: 500px;
+            height: 600px;
         }
     </style>
 </head>
+
 <body>
-    <h1 >프로젝트명: 인구통계 데이터 분석 </h1>
-    <table border =1>
-        
+    <h1>프로젝트명: 인구통계 데이터 분석 </h1>
+    <table border="1">
+
         <tr>
             <th>메뉴</th>
             <td rowspan="8">
-                <iframe name = 'result' frameborder="0"></iframe>
+                <iframe name='result' frameborder="0"></iframe>
+            </td>
+        </tr>
+
+        <tr>
+            <td class='left'>
+                <a href="{{url_for('result', no = '1')}}" target="result">1. 분석목표 및 방법 </a>
             </td>
         </tr>
 
         <tr>
             <td>
-                <a href="{{url_for('result', no = '1')}}" target="result">1. 분석목표 및 방법 </a> 
+                <a href="{{url_for('result', no = '2')}}" target="result">2. 사용한 라이브러리 <br>및 활용 데이터셋</a>
             </td>
         </tr>
 
         <tr>
             <td>
-                <a href="{{url_for('result', no = '2')}}" target="result">2. 사용한 라이브러리 및 활용 데이터셋</a> 
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                <a href="{{url_for('result', no = '3')}}" target="result">3. 데이터 전처리 과정</a> 
+                <a href="{{url_for('result', no = '3')}}" target="result">3. 데이터 전처리 과정</a>
             </td>
         </tr>
 
@@ -78,7 +104,7 @@
 
         <tr>
             <td>
-                 <a href="{{url_for('result' , no = '7')}}" target="result">7. 팀원역할 </a>
+                <a href="{{url_for('result' , no = '7')}}" target="result">7. 팀원역할 </a>
             </td>
         </tr>
 
@@ -86,4 +112,5 @@
 
     <div id="bk1"></div>
 </body>
+
 </html>
