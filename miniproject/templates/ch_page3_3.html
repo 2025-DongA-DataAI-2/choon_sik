@@ -4,8 +4,175 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+           /* 1. 전체 배경 디자인: 은은한 블루 그라데이션 */
+        body {
+            background: linear-gradient(135deg, #f0f2f5 0%, #d9e2ec 100%);
+            background-attachment: fixed;
+            margin: 0;
+            padding: 50px 20px;
+            display: flex;
+            justify-content: center;
+            font-family: 'Pretendard', sans-serif;
+        }
+         /* 2. 콘텐츠 카드 컨테이너: 흰색 박스로 콘텐츠 강조 */
+        .container {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 900px;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+         h1 {
+            text-align: center;
+            color: #1a3a5f;
+            border-bottom: 2px solid #e1e8ed;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+          /* 3. 버튼 레이아웃: 왼쪽 정렬 */
+        .controls {
+            display: flex;
+            justify-content: flex-start;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .controls button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px; /* 캡슐형보다 세련된 라운드 */
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-expand { background-color: #0056b3; color: white; }
+        .btn-expand:hover { background-color: #004494; transform: translateY(-2px); }
+
+        .btn-collapse { background-color: #f1f3f5; color: #495057; }
+        .btn-collapse:hover { background-color: #e9ecef; transform: translateY(-2px); }
+
+        /* 4. Details/Summary 디자인 최적화 */
+        details {
+            border: 1px solid #edf2f7;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            background: #f8f9fa;
+            transition: all 0.3s;
+        }
+
+        details[open] {
+            background: #ffffff;
+            border-color: #0056b3;
+            box-shadow: 0 5px 15px rgba(0, 86, 179, 0.1);
+        }
+
+        summary {
+            padding: 18px 25px;
+            font-weight: bold;
+            color: #334e68;
+            cursor: pointer;
+            list-style: none; /* 기본 삼각형 제거 가능 */
+            outline: none;
+        }
+
+        /* 5. 내용 및 이미지 스타일 */
+        p {
+            background: #ffffff;
+            padding: 25px;
+            margin: 0 10px 10px 10px;
+            border-top: 1px solid #f1f3f5;
+            line-height: 1.8;
+            color: #486581;
+        }
+
+        img {
+            display: block;
+            margin: 20px auto 0;
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+    </style>
 </head>
 <body>
-    <h1>인구 자연증감율 </h1>
+     <div class="container">
+        <h1>
+        데이터 전처리 과정 - 인구자연증가율 (출산/사망비교)
+      </h1>
+
+      <div class="controls">
+            <button onclick="toggleAll(true)" class="btn-expand">
+                <span>📂</span> 모두 펼치기
+            </button>
+            <button onclick="toggleAll(false)" class="btn-collapse">
+                <span>📁</span> 모두 접기
+            </button>
+      </div>
+    
+    <details>
+        <summary>
+            1. 활용한 데이터에 대한 파악
+    </summary>
+
+        <p>
+             수집한 데이터 파일(csv) 불러와서 유의미/무의미한 데이터 확인
+         <br>
+            <img src="./cap1.png" width="700">
+            <br>
+            -> 비정형 통계 테이블을 '분석용 시계열 데이터'로 변환하는 정제 
+            <br>
+            <img src="./cap2.png" width="700">
+        </p>
+    </details>
+    
+   <details>
+    <summary>
+        2. 무의미한 데이터 제거하기
+    </summary>
+    <p>
+         분석에 방해되는 불순물을 제거하고 순수하게 숫자 데이터만 남기는 최종 다듬기
+        <br>
+        <img src="./cap3.png" width="700">
+    </p>
+   </details>
+
+
+    <details>
+            <summary> 3. 국내 지역별 인구 변동성 분석 및 미래 성장 잠재력 평가</summary>
+            <p>
+                지역별 인구자연증가율 기반 종합 활력도 순위 분석
+                <br>
+                <img src="./CAP4.png" width="700">
+            </p>
+        </details>
+
+        <details>
+            <summary>4. 시각화 된 데이터들의 이미지파일로 변환</summary>
+            <p>
+                시각화 된 차트들을 이미지파일로 저장 
+                <br>
+                 <img src="./cap5.png" width="700">
+                <img src="./cap6.png" width="700">
+            </p>
+        </details>
+    </div>
+
+    <script>
+        function toggleAll(isOpen){
+            const details = document.querySelectorAll('details');
+            details.forEach(el => {
+                el.open = isOpen;
+            })
+        }
+    </script>
 </body>
 </html>
