@@ -1,11 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+        /* 하얀색 카드 컨테이너 */
+        .container {
+            background-color: #ffffff;
+            width: 90%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            box-sizing: border-box;
+        }
+
+
+        #title5 {
+            padding-top: 10px;
+            padding-left: 30px;
+            color: rgb(21, 21, 59);
+        }
+
+
+        .dot {
+            border-top: 2px solid;
+            color: rgb(88, 88, 88);
+            margin: 30px 0;
+        }
+
+        /* 3. 상단 대제목 스타일 */
+        #local {
+            color: #1a3a5f;
+            border-bottom: 2px solid #e1e8ed;
+            padding-bottom: 15px;
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+
+        /* 4. 모든 토글(details) 공통 스타일 */
+        details {
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+
+        /* 클릭하는 타이틀(summary) 스타일 */
+        summary {
+            color: #0056b3;
+            /* 진한 파란색 */
+            font-size: 18px;
+            /* 폰트 크기 확대 */
+            font-weight: bold;
+            cursor: pointer;
+            outline: none;
+            list-style: none;
+            /* 기본 화살표 숨기기 */
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        /* 커스텀 화살표 아이콘 */
+        summary::before {
+            content: '▶';
+            font-size: 12px;
+            margin-right: 10px;
+            transition: transform 0.2s;
+        }
+
+        details[open] summary::before {
+            transform: rotate(90deg);
+            /* 열릴 때 화살표 회전 */
+        }
+
+        /* 5. 펼쳐지는 본문 박스 스타일 */
+        p {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            line-height: 1.8;
+            color: #334e68;
+            margin: 5px 0 10px 0;
+            word-break: break-all;
+        }
+
+        /* 6. 이미지 설정 */
+        img {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 1px solid #eee;
+        }
+
+        .link {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+
+        #daegu{
+            display: block;
+            text-align: center;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>5. 분석에 대한 결론</h1>
+    <h2 id=title5>5. 분석에 대한 결론</h2>
+    <hr class="dot">
+
+    <div class="container">
+
+        <!-- 서울  -->
+
+        <!-- 부산  -->
+        <h2 class="local">[지역] - 부산광역시</h2>
+
+        <details>
+            <summary>[데이터 결론]</summary>
+            <p>
+                해석 : 자연증가율이 높은 순위가 1순위인 것으로 보아
+                고령화가 심각해 사망자가 출생자를 크게 앞질렀다는 뜻<br>
+                부산이 초고령사회인 이유 : 약 330만명의 인구 중, 고령인구 (65세 이상)의 인구가
+                82만 명으로 초고령사회의 기준인 20%를 훌쩍 넘김.<br>
+
+
+                출처 : <br>
+                <a href="https://data.busan.go.kr/bdip/statistics/busan/bmi.do;jsessionid=A9E3A8147579EE8A00C2582717F86356.worker2?clsf=BMI_POP"
+                    class="link">
+                    https://data.busan.go.kr/bdip/statistics/busan/bmi.do;jsessionid=A9E3A8147579EE8A00C2582717F86356.worker2?clsf=BMI_POP
+                </a>
+            </p>
+        </details>
+
+        <details>
+            <summary>[정책]</summary>
+            <p>
+                - 자연증가율의 가장 큰 원인인 사망률을 줄이는 정책
+                <br> -> 의료복지나 사업을 통합 건강수명을 늘리는 정책
+            </p>
+        </details>
+
+        <details>
+            <summary>[해당 정책으로 인해 기대되는 효과]</summary>
+            <p>
+                - 초고령 사회로 인한 사망률을 줄이기 위해서 위의 해당 정책을 통해,<br>
+                고령 인구의 재택의료 및 방문진료 등을 활성화하여 건강수명을 늘린다면 가장 큰 단점인
+                자연증가율을 보완할 수 있을것.
+                <br>정책의 모티브 : 일본의 '지역포괄케어(Community-based Integrated Care)'를 모방.
+            </p>
+        </details>
+    </div>
+    <br>
+
+
+        <!-- 울산 -->
+
+        <!-- 대구  -->
+
+    <div class="container">
+
+        <h2 class="local">[지역] - 대구광역시</h2>
+
+        <details>
+            <summary>[데이터 결론]</summary>
+            <p>
+                해석 : 자연증가율이 상대적으로 낮고, 초고령사회에 진입하면서 사망률이 증가<br>
+                대구도 마찬가지로 2024년부터 노인의 비율이 20%가 넘어 초고령사회로 진입하게 되었다.<br>
+                <br><br>
+                <span id="daegu">[2013년부터 2024년까지의 대구광역시 고령인구 증가율] </span>
+
+                <img src = '/static/daegu_old.png'>
+                
+            
+
+
+
+            </p>
+        </details>
+
+        <details>
+            <summary>[정책]</summary>
+            <p>
+                - 고령친화도시 정책
+                <br> -> 노인들의 일자리와 사회활동 지원
+                <br> 돌봄 서비스, 여가활동 참여 촉진
+   
+                <br> 
+                <a href="http://info.daegu.go.kr/newshome/mtnmain.php?mtnkey=articleview&mkey=50&aid=269247"
+                    class="link">
+                    출처 : 대구광역시 - 고령친화도시 정책 
+
+                </a>
+
+                <br><br>
+                
+                - 통합난임치료센터
+                <br> -> 난임치료에 특화되어 있는 의료진 투입
+                <br> -> 시술비 급여 부분 부담금 100% 지원
+
+                <br>
+                <a href="http://info.daegu.go.kr/newshome/mtnmain.php?mtnkey=articleview&mkey=scatelist&aid=265763&bpage=1&stext="
+                    class="link">
+                    출처 : 대구광역시 - 통합난임치료센터
+
+                </a>
+            </p>
+        </details>
+
+        <details>
+            <summary>[해당 정책으로 인해 기대되는 효과]</summary>
+            <p>
+                - 높아지는 노인의 고독사나 빈곤으로 인한 사망률이 낮아질 활률 <br>
+                - 타 지역에 비해 높은 출생률에 더해 자연증가율을 높일 수 있음
+            </p>
+        </details>
+
+    </div>
+
+        <!-- 대전  -->
+
+        <!-- 광주 -->
+
+        <!-- 인천  -->
 </body>
+
 </html>
