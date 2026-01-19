@@ -2,468 +2,484 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
 
-    <style>
-        /* 하얀색 카드 컨테이너 */
-        .container {
-            background-color: #ffffff;
-            width: 90%;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            box-sizing: border-box;
-        }
+  <style>
+    /* 하얀색 카드 컨테이너 */
+    .container {
+      background-color: #ffffff;
+      width: 90%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      box-sizing: border-box;
+    }
 
+    #title5 {
+      padding-top: 10px;
+      padding-left: 30px;
+      color: rgb(21, 21, 59);
+    }
 
-        #title5 {
-            padding-top: 10px;
-            padding-left: 30px;
-            color: rgb(21, 21, 59);
-        }
+    .dot {
+      border-top: 2px solid;
+      color: rgb(88, 88, 88);
+      margin: 30px 0;
+    }
 
+    /* 상단 대제목 스타일 */
+    #local {
+      color: #1a3a5f;
+      border-bottom: 2px solid #e1e8ed;
+      padding-bottom: 15px;
+      margin-top: 0;
+      margin-bottom: 30px;
+      font-size: 24px;
+    }
 
-        .dot {
-            border-top: 2px solid;
-            color: rgb(88, 88, 88);
-            margin: 30px 0;
-        }
+    /* 모든 토글(details) 공통 스타일 */
+    details {
+      margin-top: 20px;
+      margin-bottom: 15px;
+    }
 
-        /* 3. 상단 대제목 스타일 */
-        #local {
-            color: #1a3a5f;
-            border-bottom: 2px solid #e1e8ed;
-            padding-bottom: 15px;
-            margin-top: 0;
-            margin-bottom: 30px;
-            font-size: 24px;
-        }
+    /* 클릭하는 타이틀(summary) 스타일 */
+    summary {
+      color: #0056b3;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      outline: none;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      padding: 10px 0;
+    }
 
-        /* 4. 모든 토글(details) 공통 스타일 */
-        details {
-            margin-top: 20px;
-            margin-bottom: 15px;
-        }
+    /* 커스텀 화살표 아이콘 */
+    summary::before {
+      content: '▶';
+      font-size: 12px;
+      margin-right: 10px;
+      transition: transform 0.2s;
+    }
 
-        /* 클릭하는 타이틀(summary) 스타일 */
-        summary {
-            color: #0056b3;
-            /* 진한 파란색 */
-            font-size: 18px;
-            /* 폰트 크기 확대 */
-            font-weight: bold;
-            cursor: pointer;
-            outline: none;
-            list-style: none;
-            /* 기본 화살표 숨기기 */
-            display: flex;
-            align-items: center;
-            padding: 10px 0;
-        }
+    details[open] summary::before {
+      transform: rotate(90deg);
+    }
 
-        /* 커스텀 화살표 아이콘 */
-        summary::before {
-            content: '▶';
-            font-size: 12px;
-            margin-right: 10px;
-            transition: transform 0.2s;
-        }
+    /* 펼쳐지는 본문 박스 스타일 */
+    p {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 12px;
+      line-height: 1.8;
+      color: #334e68;
+      margin: 5px 0 10px 0;
+      word-break: break-all;
+    }
 
-        details[open] summary::before {
-            transform: rotate(90deg);
-            /* 열릴 때 화살표 회전 */
-        }
+    /* 이미지 설정 */
+    img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 15px 0;
+      border: 1px solid #eee;
+    }
 
-        /* 5. 펼쳐지는 본문 박스 스타일 */
-        p {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 12px;
-            line-height: 1.8;
-            color: #334e68;
-            margin: 5px 0 10px 0;
-            word-break: break-all;
-        }
+    .link {
+      color: #667eea;
+      text-decoration: none;
+      font-size: 0.9em;
+    }
 
-        /* 6. 이미지 설정 */
-        img {
-            display: block;
-            width: 100%;
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin: 15px 0;
-            border: 1px solid #eee;
-        }
+    .link:hover {
+      text-decoration: underline;
+    }
 
-        .link {
-            color: #667eea;
-            text-decoration: none;
-            font-size: 0.9em;
-        }
+    #daegu {
+      display: block;
+      text-align: center;
+    }
 
-        .link:hover {
-            text-decoration: underline;
-        }
+    /* ✅ 큰 토글(summary) 전용 */
+    .big-summary {
+      font-size: 20px;
+      color: #1a3a5f;
+      padding: 12px 0;
+    }
 
-        #daegu {
-            display: block;
-            text-align: center;
-        }
-    </style>
+    /* ✅ 큰 토글 안쪽 여백 */
+    .region-wrap {
+      margin-top: 15px;
+    }
+
+    /* ✅ (옵션) 카드 안에 카드 느낌 완화: 큰 토글 내부 container는 그림자 제거 + 테두리로 구분 */
+    #policy-toggle .container {
+      box-shadow: none;
+      border: 1px solid #eee;
+    }
+  </style>
 </head>
 
 <body>
-    <h2 id=title5>5. 분석에 대한 결론</h2>
-    <hr class="dot">
+  <h2 id="title5">5. 분석에 대한 결론</h2>
+  <hr class="dot">
 
-    <div class="container">
+  <!-- ✅ (1) 데이터 분석 결과를 네가 직접 작성할 상단 박스 -->
+  <div class="container" id="analysis-summary">
+    <h2 id="local">데이터 분석 결과</h2>
+    <p>
+      <!-- 여기에 네가 분석 결과를 자유롭게 작성하면 됨 -->
+      이번 분석은 서울과 6개 광역시를 대상으로 순이동률, 출산율, 자연증가율의
+       <br>데이터를 분석하여 지역별 인구소멸 위험 정도 비교와 그 원인을 알아보고자 하였다.  
+       <br> <br>
+      단, 지역 소멸의 위험은 단일 요인에서만 결정되는 것이 아니기 때문에, <br>
+      각 위험 요인의 1위부터 7위까지 순차적으로 1~7점의 점수를 부여하고 총점을 구해 비교함으로써 <br>
+      서로 다른 요인을 동일한 기준으로 통합하였다.
+       <br> <br>
+      분석 결과, 소멸 위기 순위는 <서울>, <부산>, <울산>, <대구>, <대전>, <광주>, <인천><br>
+      순서로 서울, 부산, 울산, 대구가 타지역에 비해 상대적으로 높은 위험도를 보였으며.<br>
+      대전, 광주, 인천이 상위권 지역에 비해 비교적 완만한 위험도를 보였다. <br>
+      하지만 대부분의 지역들이 한 가지 지표에서만 불리한 것이 아니라, <br>
+      여러 요인이 복합적으로 불리하게 작용하고 있었기에 인구 소멸을 복합 구조 문제로 정의하고, 
+       <br>여러 지표에서 동시에 취약한 지역을 찾아 그에 맞는 대응 정책을 찾고자 한다.
 
-        <!-- 서울  -->
-                 <h2> <서울특별시> </h2>
+    </p>
+    <div style="display: flex; justify-content: center; gap: 20px;">
+      <img src="../static/누적 순위.PNG" style="max-width: 400px;">
+      <img src="../static/레이더.PNG" style="max-width: 400px;">
+    </div>
+  </div>
 
-        <details>
+  <br>
+
+  <!-- ✅ (2) 지역들을 하나로 묶는 큰 토글 -->
+  <div class="container">
+    <details id="policy-toggle">
+      <summary class="big-summary">지역별 결론 및 대응 정책</summary>
+
+      <div class="region-wrap">
+
+        <!-- 서울 -->
+        <div class="container">
+          <h2> &lt;서울특별시&gt; </h2>
+
+          <details>
             <summary>[데이터 결론]</summary>
             <div class="content">
-                해석 : 서울은 <strong>출생률(1위/최악)</strong>과 <strong>순이동률(2위/매우 불리)</strong> 지표에서 가장 낮은 점수를 기록했습니다.<br>
-                결론 : 이는 젊은 층이 기회를 찾아 서울로 진입했다가, 가정을 꾸릴 시기에 높은 주거비와 경쟁을 견디지 못하고 경기도·인천으로 밀려나는 <strong>'고비용 구조적 위기'</strong>에 처해 있음을 보여줍니다.<br><br>
-                출처 : 
-                <a href="https://data.seoul.go.kr/" class="link" target="_blank">https://data.seoul.go.kr/ (서울열린데이터광장)</a>
+              해석 : 서울은 <strong>출생률(1위/최악)</strong>과 <strong>순이동률(2위/매우 불리)</strong> 지표에서 가장 낮은 점수를 기록했습니다.<br>
+              결론 : 이는 젊은 층이 기회를 찾아 서울로 진입했다가, 가정을 꾸릴 시기에 높은 주거비와 경쟁을 견디지 못하고 경기도·인천으로 밀려나는 <strong>'고비용 구조적 위기'</strong>에 처해 있음을 보여줍니다.<br><br>
+              출처 :
+              <a href="https://data.seoul.go.kr/" class="link" target="_blank">https://data.seoul.go.kr/ (서울열린데이터광장)</a>
             </div>
-        </details>
+          </details>
 
-        <details>
+          <details>
             <summary>[정책 및 신청 경로]</summary>
             <div class="content">
-                <span class="tag">통합 컨트롤타워</span><br>
-                <strong>1. 탄생응원 서울 프로젝트</strong><br>
-                저출생의 근본 원인인 주거, 돌봄, 일·가정 양립 문제를 해결하기 위한 통합 정책입니다.<br>
-                <a href="https://umppa.seoul.go.kr/hmpg/chpo/bsip/contPageDetail.do?conts_no=11F42D7A5406855FE063A60221626438" class="link" target="_blank">👉 프로젝트 종합 안내 바로가기</a>
-                <br><br>
+              <span class="tag">통합 컨트롤타워</span><br>
+              <strong>1. 탄생응원 서울 프로젝트</strong><br>
+              저출생의 근본 원인인 주거, 돌봄, 일·가정 양립 문제를 해결하기 위한 통합 정책입니다.<br>
+              <a href="https://umppa.seoul.go.kr/hmpg/chpo/bsip/contPageDetail.do?conts_no=11F42D7A5406855FE063A60221626438" class="link" target="_blank">👉 프로젝트 종합 안내 바로가기</a>
+              <br><br>
 
-                <span class="tag">주거 지원 및 순이동률 대응</span><br>
-                <strong>2. 신혼부부 장기전세주택Ⅱ (미리 내 집)</strong><br>
-                <a href="https://www.i-sh.co.kr/app/index.do" class="link" target="_blank">🔗 SH공사 청약센터 바로가기</a>
-                <div class="path-box">
-                    <strong>📍 찾는 경로:</strong> [공고 및 신청] → [주택임대] → [장기전세] 메뉴에서 '장기전세2' 또는 '신혼부부' 검색
-                </div>
-                <br>
+              <span class="tag">주거 지원 및 순이동률 대응</span><br>
+              <strong>2. 신혼부부 장기전세주택Ⅱ (미리 내 집)</strong><br>
+              <a href="https://www.i-sh.co.kr/app/index.do" class="link" target="_blank">🔗 SH공사 청약센터 바로가기</a>
+              <div class="path-box">
+                <strong>📍 찾는 경로:</strong> [공고 및 신청] → [주택임대] → [장기전세] 메뉴에서 '장기전세2' 또는 '신혼부부' 검색
+              </div>
+              <br>
 
-                <span class="tag">돌봄 및 수당</span><br>
-                <strong>3. 몽땅정보만능키 (통합 포털)</strong><br>
-                무주택 주거비 지원, 자영업자 출산휴가 급여 등을 원스톱으로 신청합니다.<br>
-                <a href="https://umppa.seoul.go.kr/hmpg/main.do" class="link" target="_blank">🔗 몽땅정보만능키 홈페이지 바로가기</a>
-                <div class="path-box">
-                    <strong>📍 찾는 경로:</strong> 상단 [사업안내] 메뉴 → 본인에게 맞는 지원 사업 클릭
-                </div>
+              <span class="tag">돌봄 및 수당</span><br>
+              <strong>3. 몽땅정보만능키 (통합 포털)</strong><br>
+              무주택 주거비 지원, 자영업자 출산휴가 급여 등을 원스톱으로 신청합니다.<br>
+              <a href="https://umppa.seoul.go.kr/hmpg/main.do" class="link" target="_blank">🔗 몽땅정보만능키 홈페이지 바로가기</a>
+              <div class="path-box">
+                <strong>📍 찾는 경로:</strong> 상단 [사업안내] 메뉴 → 본인에게 맞는 지원 사업 클릭
+              </div>
             </div>
-        </details>
+          </details>
 
-        <details>
+          <details>
             <summary>[해당 정책으로 인해 기대되는 효과]</summary>
             <div class="content">
-                1. <strong>순이동률 개선 및 인구 유출 방어</strong>: '미리 내 집'과 '주택 지원'을 통해 결혼·출산기 청년 가구를 서울에 머물게 함으로써 순이동률 지표를 직접적으로 보완합니다.<br><br>
-                2. <strong>출생률 반등의 토대 마련</strong>: 거주 기간 연장 및 주택 매수 우선권 등 파격적인 혜택으로 경제적 부담 때문에 출산을 주저하던 세대의 유인책이 됩니다.<br><br>
-                3. <strong>정주 만족도 향상</strong>: 서울형 키즈카페 등 인프라 확충과 자영업자·프리랜서까지 지원 범위를 확대하여 '아이 키우기 좋은 도시'로 체질을 개선합니다.
+              1. <strong>순이동률 개선 및 인구 유출 방어</strong>: '미리 내 집'과 '주택 지원'을 통해 결혼·출산기 청년 가구를 서울에 머물게 함으로써 순이동률 지표를 직접적으로 보완합니다.<br><br>
+              2. <strong>출생률 반등의 토대 마련</strong>: 거주 기간 연장 및 주택 매수 우선권 등 파격적인 혜택으로 경제적 부담 때문에 출산을 주저하던 세대의 유인책이 됩니다.<br><br>
+              3. <strong>정주 만족도 향상</strong>: 서울형 키즈카페 등 인프라 확충과 자영업자·프리랜서까지 지원 범위를 확대하여 '아이 키우기 좋은 도시'로 체질을 개선합니다.
             </div>
-        </details>
-        
-    </div>
-    <br>
-    <div class="container">
+          </details>
+        </div>
 
+        <br>
 
-        <!-- 부산  -->
-        <h2 class="local"> <부산광역시> </h2>
+        <!-- 부산 -->
+        <div class="container">
+          <h2 class="local"> &lt;부산광역시&gt; </h2>
 
-        <details>
+          <details>
             <summary>[데이터 결론]</summary>
             <p>
-                해석 : 자연증가율이 높은 순위가 1순위인 것으로 보아
-                고령화가 심각해 사망자가 출생자를 크게 앞질렀다는 뜻<br>
-                부산이 초고령사회인 이유 : 약 330만명의 인구 중, 고령인구 (65세 이상)의 인구가
-                82만 명으로 초고령사회의 기준인 20%를 훌쩍 넘김.<br>
+              해석 : 자연증가율이 높은 순위가 1순위인 것으로 보아
+              고령화가 심각해 사망자가 출생자를 크게 앞질렀다는 뜻<br>
+              부산이 초고령사회인 이유 : 약 330만명의 인구 중, 고령인구 (65세 이상)의 인구가
+              82만 명으로 초고령사회의 기준인 20%를 훌쩍 넘김.<br>
 
-
-                출처 : <br>
-                <a href="https://data.busan.go.kr/bdip/statistics/busan/bmi.do;jsessionid=A9E3A8147579EE8A00C2582717F86356.worker2?clsf=BMI_POP"
-                    class="link">
-                    https://data.busan.go.kr/bdip/statistics/busan/bmi.do;jsessionid=A9E3A8147579EE8A00C2582717F86356.worker2?clsf=BMI_POP
-                </a>
+              출처 : <br>
+              <a href="https://data.busan.go.kr/bdip/statistics/busan/bmi.do;jsessionid=A9E3A8147579EE8A00C2582717F86356.worker2?clsf=BMI_POP" class="link">
+                https://data.busan.go.kr/bdip/statistics/busan/bmi.do;jsessionid=A9E3A8147579EE8A00C2582717F86356.worker2?clsf=BMI_POP
+              </a>
             </p>
-        </details>
+          </details>
 
-        <details>
+          <details>
             <summary>[정책]</summary>
             <p>
-                - 자연증가율의 가장 큰 원인인 사망률을 줄이는 정책
-                <br> -> 의료복지나 사업을 통합 건강수명을 늘리는 정책
+              - 자연증가율의 가장 큰 원인인 사망률을 줄이는 정책
+              <br> -> 의료복지나 사업을 통합 건강수명을 늘리는 정책
             </p>
-        </details>
+          </details>
 
-        <details>
+          <details>
             <summary>[해당 정책으로 인해 기대되는 효과]</summary>
             <p>
-                - 초고령 사회로 인한 사망률을 줄이기 위해서 위의 해당 정책을 통해,<br>
-                고령 인구의 재택의료 및 방문진료 등을 활성화하여 건강수명을 늘린다면 가장 큰 단점인
-                자연증가율을 보완할 수 있을것.
-                <br>정책의 모티브 : 일본의 '지역포괄케어(Community-based Integrated Care)'를 모방.
+              - 초고령 사회로 인한 사망률을 줄이기 위해서 위의 해당 정책을 통해,<br>
+              고령 인구의 재택의료 및 방문진료 등을 활성화하여 건강수명을 늘린다면 가장 큰 단점인
+              자연증가율을 보완할 수 있을것.
+              <br>정책의 모티브 : 일본의 '지역포괄케어(Community-based Integrated Care)'를 모방.
             </p>
-        </details>
-    </div>
-    <br>
+          </details>
+        </div>
 
+        <br>
 
-    <!-- 울산 -->
-    <div class="container">
-        <h2> <울산광역시> </h2>
+        <!-- 울산 -->
+        <div class="container">
+          <h2> &lt;울산광역시&gt; </h2>
 
-        <details>
+          <details>
             <summary>[데이터 결론]</summary>
             <p>
-                순이동률이 1순위인 울산의 데이터를 통해 인구 유입이 적고, 유출이 많다는 것을 확인 가능.<br>
-                즉 순이동률 자체를 완화하는 정책이 시급해보인다.
-
+              순이동률이 1순위인 울산의 데이터를 통해 인구 유입이 적고, 유출이 많다는 것을 확인 가능.<br>
+              즉 순이동률 자체를 완화하는 정책이 시급해보인다.
             </p>
-        </details>
+          </details>
 
-        <details>
+          <details>
             <summary>[정책]</summary>
             <p>
-                - 순이동률의 가장 큰 원인인 청년 유출의 완화를 위한 정책<br>
-                : <strong>지역특화 비즈니스 연계형 모델</strong> -> 기업과 협업하여 청년의 일자리를 보장해주고, 정착을 위한 정책<br><br>
+              - 순이동률의 가장 큰 원인인 청년 유출의 완화를 위한 정책<br>
+              : <strong>지역특화 비즈니스 연계형 모델</strong> -> 기업과 협업하여 청년의 일자리를 보장해주고, 정착을 위한 정책<br><br>
 
-                <strong>정책 모티브 :</strong> 국토교통부의 '도심융합특구' 계획 (판교 모델의 지방 확산 버전)<br>
+              <strong>정책 모티브 :</strong> 국토교통부의 '도심융합특구' 계획 (판교 모델의 지방 확산 버전)<br>
 
-                <strong>정책의 출처 :</strong><br>
-                <a href="https://www.mt.co.kr/policy/2026/01/15/2026011509414658040" class="link" target="_blank">
-                    https://www.mt.co.kr/policy/2026/01/15/2026011509414658040
-                </a>
+              <strong>정책의 출처 :</strong><br>
+              <a href="https://www.mt.co.kr/policy/2026/01/15/2026011509414658040" class="link" target="_blank">
+                https://www.mt.co.kr/policy/2026/01/15/2026011509414658040
+              </a>
             </p>
-        </details>
+          </details>
 
-        <details>
+          <details>
             <summary>[해당 정책으로 인해 기대되는 효과]</summary>
             <p>
-                - 순이동률의 획기적인 개선으로 인구 유출을 막고,<br>
-                청년층의 정착률을 높여 인구의 구성이 다양해지고 활력이 생김.
+              - 순이동률의 획기적인 개선으로 인구 유출을 막고,<br>
+              청년층의 정착률을 높여 인구의 구성이 다양해지고 활력이 생김.
             </p>
-        </details>
-    </div>
-    <br>
+          </details>
+        </div>
 
+        <br>
 
-    <!-- 대구  -->
+        <!-- 대구 -->
+        <div class="container">
+          <h2 class="local"> &lt;대구광역시&gt; </h2>
 
-    <div class="container">
-
-        <h2 class="local"> <대구광역시> </h2>
-
-        <details>
+          <details>
             <summary>[데이터 결론]</summary>
             <p>
-                해석 : 자연증가율이 상대적으로 낮고, 초고령사회에 진입하면서 사망률이 증가<br>
-                대구도 마찬가지로 2024년부터 노인의 비율이 20%가 넘어 초고령사회로 진입하게 되었다.<br>
-                <br><br>
-                <span id="daegu">[2013년부터 2024년까지의 대구광역시 고령인구 증가율] </span>
+              해석 : 자연증가율이 상대적으로 낮고, 초고령사회에 진입하면서 사망률이 증가<br>
+              대구도 마찬가지로 2024년부터 노인의 비율이 20%가 넘어 초고령사회로 진입하게 되었다.<br>
+              <br><br>
+              <span id="daegu">[2013년부터 2024년까지의 대구광역시 고령인구 증가율] </span>
 
-                <img src='/static/daegu_old.png'>
-
-
-
-
-
+              <img src='/static/daegu_old.png'>
             </p>
-        </details>
+          </details>
 
-        <details>
+          <details>
             <summary>[정책]</summary>
             <p>
-                - 고령친화도시 정책
-                <br> -> 노인들의 일자리와 사회활동 지원
-                <br> 돌봄 서비스, 여가활동 참여 촉진
+              - 고령친화도시 정책
+              <br> -> 노인들의 일자리와 사회활동 지원
+              <br> 돌봄 서비스, 여가활동 참여 촉진
 
-                <br>
-                <a href="http://info.daegu.go.kr/newshome/mtnmain.php?mtnkey=articleview&mkey=50&aid=269247"
-                    class="link">
-                    출처 : 대구광역시 - 고령친화도시 정책
+              <br>
+              <a href="http://info.daegu.go.kr/newshome/mtnmain.php?mtnkey=articleview&mkey=50&aid=269247" class="link">
+                출처 : 대구광역시 - 고령친화도시 정책
+              </a>
 
-                </a>
+              <br><br>
 
-                <br><br>
+              - 통합난임치료센터
+              <br> -> 난임치료에 특화되어 있는 의료진 투입
+              <br> -> 시술비 급여 부분 부담금 100% 지원
 
-                - 통합난임치료센터
-                <br> -> 난임치료에 특화되어 있는 의료진 투입
-                <br> -> 시술비 급여 부분 부담금 100% 지원
-
-                <br>
-                <a href="http://info.daegu.go.kr/newshome/mtnmain.php?mtnkey=articleview&mkey=scatelist&aid=265763&bpage=1&stext="
-                    class="link">
-                    출처 : 대구광역시 - 통합난임치료센터
-
-                </a>
+              <br>
+              <a href="http://info.daegu.go.kr/newshome/mtnmain.php?mtnkey=articleview&mkey=scatelist&aid=265763&bpage=1&stext=" class="link">
+                출처 : 대구광역시 - 통합난임치료센터
+              </a>
             </p>
-        </details>
+          </details>
 
-        <details>
+          <details>
             <summary>[해당 정책으로 인해 기대되는 효과]</summary>
             <p>
-                - 높아지는 노인의 고독사나 빈곤으로 인한 사망률이 낮아질 활률 <br>
-                - 타 지역에 비해 높은 출생률에 더해 자연증가율을 높일 수 있음
+              - 높아지는 노인의 고독사나 빈곤으로 인한 사망률이 낮아질 활률 <br>
+              - 타 지역에 비해 높은 출생률에 더해 자연증가율을 높일 수 있음
             </p>
-        </details>
+          </details>
+        </div>
 
-    </div>
-    <br>
+        <br>
 
-    <!-- 대전  -->
+        <!-- 대전 -->
+        <div class="container">
+          <h2 class="local"> &lt;대전광역시&gt; </h2>
 
-    <div class="container">
-
-        <h2 class="local"> <대전광역시> </h2>
-
-        <details>
+          <details>
             <summary>[데이터 결론]</summary>
             <p>
-                해석 : 다른 데이터 결과에 비해 순이동률이 불리하긴 하지만 차이가 크지 않아 위험도는 중간수준.<br>
-                또한 2025년 대전의 인구가 12년 만에 반등했다는 기록이 존재한다. 
-       
+              해석 : 다른 데이터 결과에 비해 순이동률이 불리하긴 하지만 차이가 크지 않아 위험도는 중간수준.<br>
+              또한 2025년 대전의 인구가 12년 만에 반등했다는 기록이 존재한다.
             </p>
-        </details>
+          </details>
 
-        <details>
+          <details>
             <summary>[정책]</summary>
             <p>
-                - 주택임차보증금 / 주택전세자금 
+              - 주택임차보증금 / 주택전세자금
 
-                <br>
-                <a href="https://www.khan.co.kr/article/202601051042001"
-                    class="link">
-                    출처 : 경향신문 - 대전 인구 반등 
+              <br>
+              <a href="https://www.khan.co.kr/article/202601051042001" class="link">
+                출처 : 경향신문 - 대전 인구 반등
+              </a>
 
-                </a>
-
-                <br><br>
-
-    
+              <br><br>
             </p>
-        </details>
+          </details>
 
-        <details>
+          <details>
             <summary>[해당 정책으로 인해 기대되는 효과]</summary>
             <p>
-                - 실제 인구가 증가한 바 있기 때문에, 효과는 보장되었다고도 볼 수 있으며 앞으로의 인구 변화에 집중해야 한다. <br>
-                
+              - 실제 인구가 증가한 바 있기 때문에, 효과는 보장되었다고도 볼 수 있으며 앞으로의 인구 변화에 집중해야 한다. <br>
             </p>
-        </details>
+          </details>
+        </div>
 
-    </div>
-    <br>
+        <br>
 
-    <!-- 광주 -->
-     <div class="container">
-        <h2> <광주광역시> </h2>
+        <!-- 광주 -->
+        <div class="container">
+          <h2> &lt;광주광역시&gt; </h2>
 
-        <details>
+          <details>
             <summary>[데이터 결론]</summary>
             <p>
-                해석 : 광주는 지속적인 출생아 수 감소와 고령화로 인한 사망자 증가로, <br>
-                다른 요인보다 상대적으로 자연증가율이 낮음.<br>
-
-                
+              해석 : 광주는 지속적인 출생아 수 감소와 고령화로 인한 사망자 증가로, <br>
+              다른 요인보다 상대적으로 자연증가율이 낮음.<br>
             </p>
-        </details>
+          </details>
 
-        <details>
+          <details>
             <summary>[정책]</summary>
+
             <p>
-                <span class="col">1. 임신, 출산 맞춤형 지원</span>
-                <br> : 임신과 출산 과정에 필요한 포괄적 지원 제공을 통해 경제적 부담을 줄이고,<br> 
-영유아 양육에 필요한 필수 물품 지원.
+              <span class="col">1. 임신, 출산 맞춤형 지원</span>
+              <br> : 임신과 출산 과정에 필요한 포괄적 지원 제공을 통해 경제적 부담을 줄이고,<br>
+              영유아 양육에 필요한 필수 물품 지원.
             </p>
 
             <p>
-                <span class="col">2. 돌봄, 보육 환경 조성</span>
-                <br> : 아동과 청소년이 부담없이 놀이와 문화 활동을 즐길 수 있는 전용 공간 조성,<br> 
-실내놀이터 끼움틀 운영 및 자치구별 공공 키즈카페 운영.
+              <span class="col">2. 돌봄, 보육 환경 조성</span>
+              <br> : 아동과 청소년이 부담없이 놀이와 문화 활동을 즐길 수 있는 전용 공간 조성,<br>
+              실내놀이터 끼움틀 운영 및 자치구별 공공 키즈카페 운영.
             </p>
 
             <p>
-                <span class="col">3. 영유아, 아동 의료서비스 확대</span>
-                <br> : 24시간 및 야간, 휴일에도 운영가능한 공공 병원 및 약국 지원 확대, <br> 
-긴급 수술 및 치료가 필요한 영유아 및 아동에 의료비 지원.
+              <span class="col">3. 영유아, 아동 의료서비스 확대</span>
+              <br> : 24시간 및 야간, 휴일에도 운영가능한 공공 병원 및 약국 지원 확대, <br>
+              긴급 수술 및 치료가 필요한 영유아 및 아동에 의료비 지원.
             </p>
-        </details>
+          </details>
 
-        <details>
+          <details>
             <summary>[해당 정책으로 인해 기대되는 효과]</summary>
             <p>
-                : 2024년 진행된 광주 인구 정책 시민의견 조사에 따르면,<br>
-                임신과 출산부터 이후 양육 과정까지 가장 필요하고 중요한 정책적 지원으로<br>
-                경제적 부담을 줄이기 위한 직접적인 경제적 지원이 필요하다고 응답.<br>
-                다음으로는 아이들을 믿고 맡길 수 있는 환경과 의료지원을 뽑음.<br>
-                <br>
-                이에 따라 임신·출산 맞춤형 지원과 돌봄·보육 인프라 확충,영유아 의료서비스 확대 정책은<br>
-                출산과 양육에 대한 가계의 경제적·심리적 부담을 동시에 완화하는 효과 기대.<br>
-                <br>
-                이는 출산을 미루거나 포기하게 만드는 주요 요인을 완화함으로써<br>
-                장기적으로 출생아 수 감소 속도를 둔화시키고,<br>
-                자연증가율 하락의 구조적 요인 중 하나를 완화하는 데 기여할 가능성 존재
+              : 2024년 진행된 광주 인구 정책 시민의견 조사에 따르면,<br>
+              임신과 출산부터 이후 양육 과정까지 가장 필요하고 중요한 정책적 지원으로<br>
+              경제적 부담을 줄이기 위한 직접적인 경제적 지원이 필요하다고 응답.<br>
+              다음으로는 아이들을 믿고 맡길 수 있는 환경과 의료지원을 뽑음.<br>
+              <br>
+              이에 따라 임신·출산 맞춤형 지원과 돌봄·보육 인프라 확충,영유아 의료서비스 확대 정책은<br>
+              출산과 양육에 대한 가계의 경제적·심리적 부담을 동시에 완화하는 효과 기대.<br>
+              <br>
+              이는 출산을 미루거나 포기하게 만드는 주요 요인을 완화함으로써<br>
+              장기적으로 출생아 수 감소 속도를 둔화시키고,<br>
+              자연증가율 하락의 구조적 요인 중 하나를 완화하는 데 기여할 가능성 존재
             </p>
-        </details>
-    </div>
-    <br>
+          </details>
+        </div>
 
-    <!-- 인천  -->
+        <br>
 
-    <div class="container">
+        <!-- 인천 -->
+        <div class="container">
+          <h2 class="local"> &lt;인천광역시&gt; </h2>
 
-        <h2 class="local"> <인천광역시> </h2>
-
-        <details>
+          <details>
             <summary>[데이터 결론]</summary>
             <p>
-                해석 : 지역별(광역시) 인구소멸 위험도에서 총 7위를 기록하였다.<br>
-                다른 지역에 비해 상대적으로 위험도가 낮은 편이며 높은 순이동률을 기록했다. 
-                <br>
-
-
+              해석 : 지역별(광역시) 인구소멸 위험도에서 총 7위를 기록하였다.<br>
+              다른 지역에 비해 상대적으로 위험도가 낮은 편이며 높은 순이동률을 기록했다.
+              <br>
             </p>
-        </details>
+          </details>
 
-        <details>
+          <details>
             <summary>[정책]</summary>
             <p>
-                - 신도시 개발 
-                <br> -> 검단신도시, 계양테크노밸리 등 신도심 개발
+              - 신도시 개발
+              <br> -> 검단신도시, 계양테크노밸리 등 신도심 개발
 
-
-
-                <br>
-                <a href="https://www.kihoilbo.co.kr/news/articleView.html?idxno=1153118"
-                    class="link">
-                    출처 : 기호일보 - 시민체감형 유입정책 
-
-                </a>
-
+              <br>
+              <a href="https://www.kihoilbo.co.kr/news/articleView.html?idxno=1153118" class="link">
+                출처 : 기호일보 - 시민체감형 유입정책
+              </a>
             </p>
-        </details>
+          </details>
 
-        <details>
+          <details>
             <summary>[해당 정책으로 인해 기대되는 효과]</summary>
             <p>
-                - 타지역에 비해 높은 주거지 분배 가능 <br>
-                - 순이동율을 높이는 데 이어 정책이 추가될 시 더 높은 인구 비율 기대 
-                
+              - 타지역에 비해 높은 주거지 분배 가능 <br>
+              - 순이동율을 높이는 데 이어 정책이 추가될 시 더 높은 인구 비율 기대
             </p>
-        </details>
+          </details>
+        </div>
 
-    </div>
-    
+      </div>
+    </details>
+  </div>
+
 </body>
 
 </html>
