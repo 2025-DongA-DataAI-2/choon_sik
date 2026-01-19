@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+          body {
+            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+            background-attachment: fixed;
+            margin: 0;
+            padding: 40px 0;
+            font-family: 'Pretendard', -apple-system, sans-serif;
+        }
+
+        .container {
+            background-color: #ffffff;
+            width: 95%;
+            max-width: 1150px;
+            /* 조금 더 넓게 조정 */
+            margin: 0 auto;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            color: #1a3a5f;
+            border-bottom: 3px solid #e1e8ed;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        .process-box {
+            display: flex;
+            gap: 40px;
+            background: #f8f9fa;
+            padding: 35px;
+            border-radius: 15px;
+            align-items: flex-start;
+        }
+
+        /* 왼쪽 텍스트 영역 */
+        .text-side {
+            flex: 1;
+            /* 텍스트가 길어지므로 비중을 조금 높임 */
+            display: flex;
+            flex-direction: column;
+            /* 순서와 결과내용을 위아래로 배치 */
+            gap: 30px;
+            /* 섹션 간 간격 */
+        }
+
+        .section-title {
+            margin: 0;
+            font-weight: bold;
+            font-size: 20px;
+            color: #0056b3;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .content-list {
+            margin: 15px 0 0 0;
+            padding-left: 20px;
+            list-style: none;
+        }
+
+        .content-list li {
+            margin-bottom: 10px;
+            font-size: 17px;
+            color: #486581;
+            line-height: 1.6;
+        }
+
+        /* 분석 결과 텍스트 스타일 */
+        .analysis-result {
+            font-size: 16px;
+            color: #334e68;
+            line-height: 1.8;
+            background: #ffffff;
+            /* 결과 내용은 흰색 박스로 강조 */
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #0056b3;
+        }
+
+        /* 오른쪽 이미지 영역 */
+        .image-side {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .image-side img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 1000px) {
+            .process-box {
+                flex-direction: column;
+            }
+
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+     <div class="container">
+        <h2>📊 데이터 시각화 및 분석 결과</h2>
+
+        <div class="process-box">
+            <div class="text-side">
+
+                <div class="order-section">
+                    <p class="section-title">📍 분석 순서</p>
+                    <ul class="content-list">
+                        <li>✅ 1. 서울 ~ 광역시 자연증가율 데이터 추출</li>
+                    </ul>
+                </div>
+
+                <div class="result-section">
+                    <p class="section-title">🔍 분석 결과 내용</p>
+                    <div class="analysis-result">
+                        <b>✅ 1. 전체적인 추세: 급격한 우하향</b>
+                        <br><br>
+                        <b>전 지역 하락:</b> 그래프에 포함된 모든 도시(서울, 부산, 대구, 인천, 광주, 대전, 울산)가 예외 없이 우하향 곡선을 그리고 있습니다.
+                        <br><br>
+                        <b>자연감소 구간 진입:</b> 2015년에는 모든 도시가 0 이상의 플러스 권역에 있었으나, 2024년 현재는 모든 조사 대상 도시가 0 아래(마이너스)로 내려와 인구가
+                        자연적으로 감소하고 있습니다.
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="image-side">
+                <img src="../static/seok6.png" alt="서울 ~ 광역시">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
