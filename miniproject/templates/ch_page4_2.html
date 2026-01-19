@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>출산률 시각화</title>
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+      background-attachment: fixed;
+      margin: 0;
+      padding: 40px 0;
+      font-family: 'Pretendard', -apple-system, sans-serif;
+    }
+
+    .container {
+      background-color: #ffffff;
+      width: 95%;
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    h2 {
+      color: #1a3a5f;
+      border-bottom: 3px solid #e1e8ed;
+      padding-bottom: 15px;
+      margin-bottom: 30px;
+      font-size: 28px;
+    }
+
+    .process-box {
+      display: flex;
+      gap: 40px;
+      background: #f8f9fa;
+      padding: 35px;
+      border-radius: 15px;
+      align-items: flex-start;
+    }
+
+    /* 왼쪽 텍스트 영역 */
+    .text-side {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-weight: bold;
+      font-size: 20px;
+      color: #0056b3;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* 분석 순서: 클릭 가능한 리스트 */
+    .step-list {
+      margin: 15px 0 0 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .step-btn {
+      width: 100%;
+      text-align: left;
+      border: 1px solid #d9e2ec;
+      background: #ffffff;
+      padding: 12px 12px;
+      border-radius: 12px;
+      font-size: 16px;
+      color: #334e68;
+      cursor: pointer;
+      transition: all .15s ease;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      line-height: 1.4;
+    }
+
+    .step-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    }
+
+    .step-btn.active {
+      border-color: #0056b3;
+      box-shadow: 0 8px 22px rgba(0, 86, 179, 0.12);
+      background: #f1f7ff;
+    }
+
+    .badge {
+      min-width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: #0056b3;
+      color: #fff;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 700;
+      font-size: 14px;
+      margin-top: 1px;
+    }
+
+    /* 오른쪽(콘텐츠) 영역 */
+    .content-side {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .analysis-result {
+      font-size: 16px;
+      color: #334e68;
+      line-height: 1.8;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      border-left: 5px solid #0056b3;
+    }
+
+    .panel {
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .panel.active {
+      display: flex;
+    }
+
+    .image-box img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    details {
+      background: #ffffff;
+      border: 1px solid #d9e2ec;
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: #1a3a5f;
+      font-size: 16px;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .year-grid {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .year-card {
+      border: 1px solid #e1e8ed;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .year-title {
+      padding: 10px 12px;
+      font-weight: 700;
+      color: #0056b3;
+      background: #f1f7ff;
+      border-bottom: 1px solid #e1e8ed;
+    }
+
+    .year-body {
+      padding: 12px;
+    }
+
+    .year-body img {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    @media (max-width: 1000px) {
+      .process-box {
+        flex-direction: column;
+      }
+
+      .container {
+        padding: 20px;
+      }
+
+      .year-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2>📊 데이터 시각화 및 분석 결과</h2>
+
+    <div class="process-box">
+      <!-- LEFT: 분석 순서 -->
+      <div class="text-side">
+        <div class="order-section">
+          <p class="section-title">📍 분석 순서</p>
+
+          <ul class="step-list">
+            <li>
+              <button class="step-btn active" data-step="step1">
+                <span class="badge">1</span>
+                <span>2015~2024, 광역시별 출산률 변화 데이터</span>
+              </button>
+            </li>
+            <li>
+              <button class="step-btn" data-step="step2">
+                <span class="badge">2</span>
+                <span>연도별 출산률과 출산률 감소율(사분면) 데이터</span>
+              </button>
+            </li>
+            <li>
+              <button class="step-btn" data-step="step3">
+                <span class="badge">3</span>
+                <span>광역시별 누적 위험점수 그래프</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- RIGHT: 클릭에 따라 바뀌는 콘텐츠 -->
+      <div class="content-side">
+
+        <!-- STEP 1 -->
+        <section id="step1" class="panel active">
+          <p class="section-title">🔍 분석 결과 내용 (1)</p>
+          <div class="analysis-result">
+            ✅ 광역시 별로 과거 대비 현재의 출산률이 얼마나 급격히 낮아졌는지 파악하기 위한
+            광역시별 출산률 변화 추이 선그래프. 2015~2024년 동안 모든 광역시의 출산률이 일관되게 하락하였음.
+            특히 울산의 경우 2015년 대비 2024년의 출산률은 약 42% 정도 하락하였으며, 인천과 대구는 각각
+            37%, 38% 하락. 비교적 출산률이 높던 세 지역이었지만 출산률 하락 속도가 타 지역에 비해 급격히 빨라지고 있음.
+          </div>
+
+          <div class="image-box">
+            <img src="./이미지/출산률 변화.PNG" alt="연도별 광역시별 출산률 변화">
+          </div>
+        </section>
+
+        <!-- STEP 2 -->
+        <section id="step2" class="panel">
+          <p class="section-title">🔍 분석 결과 내용 (2)</p>
+          <div class="analysis-result">
+            ✅ 연도별 출산률 수준과 출산률 감소폭을 비교하여 위험정도를 사분면으로 분류하기 위한 산점도.
+            출산률이 타지역에 비해 비교적 높더라도, 하락 속도가 더 빠른 지역 또한 파악 가능.
+            <br><br>
+            좌상단(낮은 출산률 + 빠른 하락)=4점, 우상단(높은 출산률 + 빠른 하락)=3점,
+            좌하단(낮은 출산률 + 완만)=2점, 우하단(높은 출산률 + 완만)=1점으로 점수를 부여하여
+            2015~2024년의 누적 점수를 계산함. 단일 시점 출산률이 아니라 “수준+속도”를 함께 반영해 종합 평가가 가능함.
+          </div>
+
+          <details>
+            <summary>📌 연도별 사분면 그래프 보기 (2015~2024)</summary>
+
+            <div class="year-grid">
+              <div class="year-card">
+                <div class="year-title">2015</div>
+                <div class="year-body">
+                  <img src="./이미지/2015.png" alt="2015년 출생 수준 대비 출산률 감소폭" />
+                </div>
+              </div>
+
+              <div class="year-card">
+                <div class="year-title">2016</div>
+                <div class="year-body">
+                  <img src="./이미지/2016.png" alt="2016년 출생 수준 대비 출산률 감소폭" />
+                </div>
+              </div>
+
+              <div class="year-card">
+                <div class="year-title">2017</div>
+                <div class="year-body">
+                  <img src="./이미지/2017.png" alt="2017년 출생 수준 대비 출산률 감소폭" />
+                </div>
+              </div>
+
+              <div class="year-card">
+                <div class="year-title">2018</div>
+                <div class="year-body">
+                  <img src="./이미지/2018.png" alt="2018년 출생 수준 대비 출산률 감소폭" />
+                </div>
+              </div>
+
+              <div class="year-card">
+                <div class="year-title">2019</div>
+                <div class="year-body">
+                  <img src="./이미지/2019.png" alt="2019년 출생 수준 대비 출산률 감소폭" />
+                </div>
+              </div>
+
+              <div class="year-card">
+                <div class="year-title">2020</div>
+                <div class="year-body">
+                  <img src="./이미지/2020.png" alt="2020년 출생 수준 대비 출산률 감소폭" />
+                </div>
+              </div>
+
+              <div class="year-card">
+                <div class="year-title">2021</div>
+                <div class="year-body">
+                  <img src="./이미지/2021.png" alt="2021년 출생 수준 대비 출산률 감소폭" />
+                </div>
+              </div>
+
+              <div class="year-card">
+                <div class="year-title">2022</div>
+                <div class="year-body">
+                  <img src="./이미지/2022.png" alt="2022년 출생 수준 대비 출산률 감소폭" />
+                </div>
+              </div>
+
+              <div class="year-card">
+                <div class="year-title">2023</div>
+                <div class="year-body">
+                  <img src="./이미지/2023.png" alt="2023년 출생 수준 대비 출산률 감소폭" />
+                </div>
+              </div>
+
+              <div class="year-card">
+                <div class="year-title">2024</div>
+                <div class="year-body">
+                  <img src="./이미지/2024.png" alt="2024년 출생 수준 대비 출산률 감소폭" />
+                </div>
+              </div>
+            </div>
+          </details>
+        </section>
+
+        <!-- STEP 3 -->
+        <section id="step3" class="panel">
+          <p class="section-title">🔍 분석 결과 내용 (3)</p>
+          <div class="analysis-result">
+            ✅ 연도별로 사분면 위험 점수를 누적한 막대그래프. 서울과 부산은 대부분의 연도에서 높은 위험 점수가 반복적으로 나타나
+            타지역에 비해 저출산 고위험으로 분류 가능하며, 울산의 경우 초기 출산률은 높았지만 빠른 출산률 하락 속도로 인해
+            누적 위험이 크게 증가하였음. 반면 광주는 비교 대상 지역 중 상대적으로 낮은 누적 점수를 보여, 상대적으로 위험 수준이 낮은 것으로 파악됨.
+          </div>
+
+          <div class="image-box">
+            <img src="./이미지/누적 점수.PNG" alt="광역시별 누적 위험점수 그래프">
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll(".step-btn");
+    const panels = document.querySelectorAll(".panel");
+
+    function showPanel(stepId) {
+      panels.forEach(p => p.classList.remove("active"));
+      const target = document.getElementById(stepId);
+      if (target) target.classList.add("active");
+
+      buttons.forEach(b => b.classList.remove("active"));
+      const activeBtn = document.querySelector(`.step-btn[data-step="${stepId}"]`);
+      if (activeBtn) activeBtn.classList.add("active");
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        showPanel(btn.dataset.step);
+      });
+    });
+  </script>
+</body>
+
+</html>
